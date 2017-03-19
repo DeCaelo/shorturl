@@ -1,13 +1,12 @@
 import Url from './model';
 
-export const createShort = (req, res) => {
+export const createShort = async (req, res) => {
   const { longUrl } = req.body;
-
   const newUrl = new Url({ longUrl });
 
-  newUrl.save()
-    .then(
-      url => res.status(201).json({ url }),
-      err => res.status(400).json({ error})
-    )
+  try {
+    return res.status(201).json({ url: await newUrl.save() });
+  } catch (e) {
+    return res.status(e.status).json({ error: true, message: 'Error with Url'});
+  }
 }
