@@ -1,6 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
+import dbConfig from './config/db';
+import middlewareConfig from './config/middleware';
 import { urlRoute } from './modules';
 
 const app = express();
@@ -11,18 +11,13 @@ const PORT = process.env.PORT || 3000;
  * DATABASE
  */
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/shorturl');
-mongoose.connection
-    .once('open', () => console.log('MONGODB connected'))
-    .on('error', err => console.error(err));
+dbConfig();
 
 /**
  * MIDDLEWARE
  */
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+middlewareConfig(app);
 
 app.get('/', (req, res) => {
     res.send('Hello');
