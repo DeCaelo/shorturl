@@ -1,7 +1,7 @@
 import express from 'express';
 import dbConfig from './config/db';
 import middlewareConfig from './config/middleware';
-import { urlRoute } from './modules';
+import { urlRoutes } from './modules';
 
 const app = express();
 
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     res.send('Hello');
 });
 
-app.use([urlRoute]);
+app.use('/api', [urlRoutes]);
 
 app.listen(PORT, err => {
     if (err) { return console.error(err) }

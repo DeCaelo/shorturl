@@ -1,3 +1,3 @@
-import urlRoute from './routes';
+import urlRoutes from './routes';
 
-export { urlRoute };
+export { urlRoutes };

@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import * as Url from './controller';
+import * as UrlController from './controller';
 
-const urlRoute = new Router();
+const routes = new Router();
 
-urlRoute.route('/api/v1/shorten').post(Url.createShort);
+routes.post('/shorten', UrlController.createShort);
 
-export default urlRoute;
+export default routes;
