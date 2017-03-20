@@ -6,7 +6,7 @@ const UrlSchema = new Schema({
   shortUrl: {
     type: String,
     unique: true,
-    maxLength: [6, "Error with the minimum length of 6"]
+    maxLength: [6, 'Error with the minimum length of 6']
   }
 });
 
@@ -22,7 +22,7 @@ const UniqueUrl = len =>
     .replace(/\+/g, '0')
     .replace(/\//g, '0');
 
-UrlSchema.pre('save', function(next, done) {
+UrlSchema.pre('save', function (next, done) {
   this.shortUrl = UniqueUrl(6);
 
   mongoose.models.Url.findOne({ shortUrl: this.shortUrl })
